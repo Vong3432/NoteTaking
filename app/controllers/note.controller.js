@@ -47,9 +47,6 @@ exports.findAll = (req, res) => {
     .populate('createdBy')
     .exec((error, data) => {
       if(error) throw error;
-
-      console.log(data.user)
-
       res.send(data)
     });
 };
@@ -59,15 +56,11 @@ exports.findOne = (req, res) => {
   const id = req.params.id;
 
   Note.findById(id)
-    .then(data => {
-      if (!data)
-        res.status(404).send({ message: "Not found Note with id " + id });
-      else res.send(data);
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .send({ message: "Error retrieving Note with id=" + id });
+    .populate('createdBy')
+    .exec((error, data) => {
+      if(error) throw error;
+
+      res.send(data)
     });
 };
 

@@ -2,7 +2,8 @@ module.exports = mongoose => {
 
   const geoSchema = mongoose.Schema({
     lng: String,
-    lat: String
+    lat: String,
+    uniqueIdLatLng: String
   })
 
   var schema = mongoose.Schema(
